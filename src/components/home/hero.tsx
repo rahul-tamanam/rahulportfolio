@@ -1,12 +1,12 @@
 'use client'
 
+import { DownloadIcon } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useState } from 'react'
 
 import BlurImage from '@/components/blur-image'
 import { MY_NAME } from '@/lib/constants'
 import { strings } from '@/lib/strings'
-import { DownloadIcon } from 'lucide-react'
 
 const TEXTS = [
   {
@@ -31,7 +31,7 @@ const TEXTS = [
   },
 ] as const
 
-const SPEED = 2
+const SPEED = 4
 
 const variants = {
   enter: {
@@ -76,14 +76,14 @@ function Hero() {
               initial={{ x: 30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ ease: 'easeOut' }}
-              className='flex gap-2'
+              className='flex flex-wrap items-baseline gap-x-1.5 text-left'
             >
-              <motion.div layout key='title-middle-left'>
+              <motion.span layout key='title-middle-left'>
                 {strings.homepage.hero['title-middle-left']}
-              </motion.div>
-              <div className='relative overflow-hidden'>
+              </motion.span>
+              <div className='relative inline-block overflow-hidden align-baseline'>
                 <AnimatePresence mode='popLayout'>
-                  <motion.div
+                  <motion.span
                     key={currentIndex}
                     variants={variants}
                     initial='enter'
@@ -94,15 +94,15 @@ function Hero() {
                       type: 'tween',
                       duration: 0.3,
                     }}
-                    className='inline-flex items-center justify-center'
+                    className='align-baseline whitespace-nowrap'
                   >
                     <span className={textItem.className}>{strings.homepage.hero[textItem.key]}</span>
-                  </motion.div>
+                  </motion.span>
                 </AnimatePresence>
               </div>
-              <motion.div layout key='title-middle-right'>
+              <motion.span layout key='title-middle-right'>
                 {strings.homepage.hero['title-middle-right']}
-              </motion.div>
+              </motion.span>
             </motion.div>
             <motion.div initial={{ x: 40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ ease: 'easeOut' }}>
               {strings.homepage.hero['title-bottom']}
@@ -122,12 +122,9 @@ function Hero() {
             initial={{ x: 60, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ ease: 'easeOut' }}
-            className='group relative -mt-4 inline-flex min-w-[96px] shrink-0 self-start overflow-hidden rounded-full p-[2px] [box-shadow:0_0_12px_2px_rgb(255_126_0/0.6),0_0_24px_8px_rgb(255_87_87/0.4)] transition-transform hover:scale-105'
+            className='group relative -mt-4 inline-flex min-w-24 shrink-0 self-start overflow-hidden rounded-full p-0.5 [box-shadow:0_0_12px_2px_rgb(255_126_0/0.6),0_0_24px_8px_rgb(255_87_87/0.4)] transition-transform hover:scale-105'
           >
-            <span
-              className='absolute inset-0 rounded-full bg-[linear-gradient(90deg,#FF7E00,#FF5757)]'
-              aria-hidden
-            />
+            <span className='absolute inset-0 rounded-full bg-[linear-gradient(90deg,#FF7E00,#FF5757)]' aria-hidden />
             <span className='relative z-10 flex flex-1 items-center justify-center gap-2 rounded-full bg-background px-4 py-2 text-base font-medium text-foreground transition-[background-color,color,text-shadow] duration-300 group-hover:bg-transparent group-hover:text-white group-hover:[text-shadow:0_1px_3px_rgba(0,0,0,0.6)]'>
               <DownloadIcon className='size-4 shrink-0' aria-hidden />
               {strings.homepage.hero['hire-me']}
