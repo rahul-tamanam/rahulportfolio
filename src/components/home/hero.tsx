@@ -133,7 +133,7 @@ function Hero() {
           </motion.a>
         </div>
         <motion.div
-          className='relative hidden size-40 md:block'
+          className='relative size-20 shrink-0 md:size-40'
           initial={{
             scale: 0,
           }}
@@ -146,7 +146,7 @@ function Hero() {
         >
           <BlurImage
             src='/images/picture.png'
-            className='size-40 rounded-full'
+            className='size-full rounded-full'
             width={1024}
             height={1024}
             alt={`${MY_NAME}'s Logo`}

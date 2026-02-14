@@ -46,6 +46,16 @@ const cardVariants = (fromLeft: boolean) => ({
   },
 })
 
+const cardContent = (experience: Experience) => (
+  <>
+    <h3 className='font-semibold text-foreground'>{experience.title}</h3>
+    <p className='mt-1 text-sm text-muted-foreground'>{experience.location}</p>
+    <p className='mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground'>
+      {experience.description}
+    </p>
+  </>
+)
+
 function TimelineCard({
   experience,
   index,
@@ -60,49 +70,63 @@ function TimelineCard({
   return (
     <motion.div
       ref={cardRef}
-      className='relative flex items-center py-4 md:py-6'
+      className='relative flex flex-col items-stretch gap-3 py-4 md:flex-row md:items-center md:gap-0 md:py-6'
       initial='initial'
       animate={isInView ? 'animate' : 'initial'}
       variants={cardVariants(fromLeft)}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
+      {/* Mobile: single column — dot, date, then full-width card */}
+      <div className='flex flex-col gap-2 md:hidden'>
+        <div className='flex items-center gap-3'>
+          <div
+            className='size-4 shrink-0 rounded-full'
+            style={{
+              background:
+                'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.12) 80%, transparent)',
+              boxShadow:
+                '0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.5), 0 0 32px rgba(255,255,255,0.3)',
+            }}
+            aria-hidden
+          />
+          <span className='text-xs font-medium text-muted-foreground'>
+            {experience.startYear} – {experience.endYear}
+          </span>
+        </div>
+        <div className='w-full rounded-2xl bg-card p-5 shadow-feature-card ring-1 ring-border/50'>
+          {cardContent(experience)}
+        </div>
+      </div>
+
+      {/* Desktop: alternating left/center/right timeline */}
       {/* Left section: card or date */}
       <div
         className={cn(
-          'flex min-w-0 flex-1 items-center',
+          'hidden min-w-0 flex-1 items-center md:flex',
           fromLeft ? 'justify-end' : 'justify-end pr-0 md:pr-8',
         )}
       >
         {fromLeft ? (
           <div className='w-full max-w-xl rounded-2xl bg-card p-5 shadow-feature-card ring-1 ring-border/50 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg'>
-            <div className='mb-2 text-xs font-medium text-muted-foreground md:hidden'>
-              {experience.startYear} – {experience.endYear}
-            </div>
-            <h3 className='font-semibold text-foreground'>{experience.title}</h3>
-            <p className='mt-1 text-sm text-muted-foreground'>{experience.location}</p>
-            <p className='mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground'>
-              {experience.description}
-            </p>
+            {cardContent(experience)}
           </div>
         ) : (
-          <div className='hidden text-end text-sm font-medium text-muted-foreground md:block'>
+          <div className='text-end text-sm font-medium text-muted-foreground'>
             {experience.startYear} – {experience.endYear}
           </div>
         )}
       </div>
 
-      {/* Center: icon in middle of timeline + straight line stretching to card */}
+      {/* Center: icon + line */}
       <div
         className={cn(
-          'relative z-10 flex flex-1 items-center md:min-w-0',
+          'relative z-10 hidden flex-1 items-center md:flex md:min-w-0',
           fromLeft ? 'md:flex-row' : 'md:flex-row-reverse',
         )}
       >
-        {/* Straight line from icon to card */}
-        <div className='hidden h-px flex-1 bg-border md:block' aria-hidden />
-        {/* White spherical icon with neon glow and blurred edges */}
+        <div className='h-px flex-1 bg-border' aria-hidden />
         <div
-          className='size-5 shrink-0 rounded-full md:size-6'
+          className='size-6 shrink-0 rounded-full'
           style={{
             background:
               'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.12) 80%, transparent)',
@@ -111,31 +135,23 @@ function TimelineCard({
           }}
           aria-hidden
         />
-        {/* Spacer to keep icon centered when line is only on one side */}
-        <div className='hidden flex-1 md:block' aria-hidden />
+        <div className='flex-1' aria-hidden />
       </div>
 
       {/* Right section: date or card */}
       <div
         className={cn(
-          'flex min-w-0 flex-1 items-center',
+          'hidden min-w-0 flex-1 items-center md:flex',
           fromLeft ? 'justify-start pl-0 md:pl-8' : 'justify-start',
         )}
       >
         {fromLeft ? (
-          <div className='hidden text-start text-sm font-medium text-muted-foreground md:block'>
+          <div className='text-start text-sm font-medium text-muted-foreground'>
             {experience.startYear} – {experience.endYear}
           </div>
         ) : (
           <div className='w-full max-w-xl rounded-2xl bg-card p-5 shadow-feature-card ring-1 ring-border/50 transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg'>
-            <div className='mb-2 text-xs font-medium text-muted-foreground md:hidden'>
-              {experience.startYear} – {experience.endYear}
-            </div>
-            <h3 className='font-semibold text-foreground'>{experience.title}</h3>
-            <p className='mt-1 text-sm text-muted-foreground'>{experience.location}</p>
-            <p className='mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground'>
-              {experience.description}
-            </p>
+            {cardContent(experience)}
           </div>
         )}
       </div>
