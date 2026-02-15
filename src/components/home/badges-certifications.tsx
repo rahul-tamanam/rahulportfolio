@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
-import { AnimatePresence, motion } from 'motion/react'
 import { AwardIcon } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 
 import { Link } from '@/components/ui/link'
@@ -87,15 +87,19 @@ function BadgesCertifications() {
   if (!badge) return null
 
   return (
-    <div className='flex flex-col gap-6 overflow-hidden rounded-2xl p-4 shadow-feature-card lg:p-6'>
+    <div className='flex flex-col gap-6 overflow-hidden rounded-2xl p-4 shadow-feature-card ring-1 [box-shadow:var(--shadow-feature-card),0_0_20px_-4px_rgb(255_255_255/0.12),0_0_40px_-12px_rgb(255_255_255/0.06)] ring-white/10 transition-shadow duration-300 hover:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.18),0_0_48px_-12px_rgb(255_255_255/0.09)] lg:p-6 dark:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.1),0_0_48px_-12px_rgb(255_255_255/0.05)] dark:ring-white/15 dark:hover:[box-shadow:var(--shadow-feature-card),0_0_28px_-4px_rgb(255_255_255/0.15),0_0_56px_-12px_rgb(255_255_255/0.08)]'>
       <div className='flex items-center gap-2'>
         <AwardIcon className='size-4.5' />
         <h2 className='text-sm'>{strings.homepage['about-me']['badges-certifications']}</h2>
       </div>
       <div
-        className='relative flex min-h-[96px] items-center justify-center overflow-hidden md:min-h-[112px]'
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        className='relative flex min-h-24 items-center justify-center overflow-hidden md:min-h-28'
+        onMouseEnter={() => {
+          setIsPaused(true)
+        }}
+        onMouseLeave={() => {
+          setIsPaused(false)
+        }}
       >
         <AnimatePresence mode='popLayout'>
           <motion.div
@@ -111,17 +115,13 @@ function BadgesCertifications() {
             }}
             className='absolute flex items-center justify-center'
           >
-            <Link
-              href={badge.href}
-              className='flex transition-opacity hover:opacity-90'
-              title={badge.alt}
-            >
+            <Link href={badge.href} className='flex transition-opacity hover:opacity-90' title={badge.alt}>
               <Image
                 src={badge.src}
                 alt={badge.alt}
-              width={112}
-              height={112}
-              className='size-24 rounded-lg object-contain md:size-28'
+                width={112}
+                height={112}
+                className='size-24 rounded-lg object-contain md:size-28'
               />
             </Link>
           </motion.div>

@@ -17,8 +17,7 @@ function MainLayout(props: MainLayoutProps) {
         {children}
       </main>
       <LayoutFooter />
-      <GradientBackground className='absolute top-0 left-1/2 -z-10 -translate-x-1/2' />
-      <GradientBackground className='absolute -bottom-6 left-1/2 -z-10 -translate-x-1/2 rotate-180' />
+      <GradientBackground className='fixed inset-0 -z-10 size-full' />
     </>
   )
 }

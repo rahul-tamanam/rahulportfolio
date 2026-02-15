@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { ChevronDownIcon } from 'lucide-react'
 import { motion, useInView } from 'motion/react'
+import Image from 'next/image'
 import { useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -24,7 +24,7 @@ type EducationEntry = {
 }
 
 const educationEntries = strings.homepage.education.entries
-const EDUCATION_ENTRIES: Omit<EducationEntry, 'showCoursework'>[] = [
+const EDUCATION_ENTRIES: Array<Omit<EducationEntry, 'showCoursework'>> = [
   {
     id: '1',
     degree: educationEntries[0]!.degree,
@@ -34,7 +34,7 @@ const EDUCATION_ENTRIES: Omit<EducationEntry, 'showCoursework'>[] = [
     logoPlaceholder: 'UTD',
     logoSrc: '/images/education/utd.png',
     logoImageClassName: 'size-full scale-140 object-contain',
-    coursework: [...(educationEntries[0]!.coursework ?? [])],
+    coursework: [...educationEntries[0]!.coursework],
     showCoursework: false,
   },
   {
@@ -46,7 +46,7 @@ const EDUCATION_ENTRIES: Omit<EducationEntry, 'showCoursework'>[] = [
     logoPlaceholder: 'GVPCE',
     logoSrc: '/images/education/gvpce.png',
     logoImageClassName: 'size-full scale-108 object-contain',
-    coursework: [...(educationEntries[1]!.coursework ?? [])],
+    coursework: [...educationEntries[1]!.coursework],
     showCoursework: false,
   },
 ]
@@ -66,9 +66,9 @@ function EducationEntryRow({ entry }: { entry: Omit<EducationEntry, 'showCoursew
         style={
           entry.logoSrc
             ? {
-              boxShadow:
-                '0 0 10px rgba(255,255,255,0.6), 0 0 24px rgba(255,255,255,0.4), 0 0 36px rgba(255,255,255,0.2)',
-            }
+                boxShadow:
+                  '0 0 10px rgba(255,255,255,0.6), 0 0 24px rgba(255,255,255,0.4), 0 0 36px rgba(255,255,255,0.2)',
+              }
             : undefined
         }
       >
@@ -81,9 +81,7 @@ function EducationEntryRow({ entry }: { entry: Omit<EducationEntry, 'showCoursew
             className={entry.logoImageClassName ?? 'size-full object-contain'}
           />
         ) : (
-          <span className='text-2xl font-semibold text-muted-foreground md:text-3xl'>
-            {entry.logoPlaceholder}
-          </span>
+          <span className='text-2xl font-semibold text-muted-foreground md:text-3xl'>{entry.logoPlaceholder}</span>
         )}
       </div>
 
@@ -101,15 +99,15 @@ function EducationEntryRow({ entry }: { entry: Omit<EducationEntry, 'showCoursew
                 variant='ghost'
                 size='xs'
                 className='h-auto gap-1 p-0 text-muted-foreground underline-offset-4 hover:text-foreground hover:underline'
-                onClick={() => setIsCourseworkOpen(!isCourseworkOpen)}
+                onClick={() => {
+                  setIsCourseworkOpen(!isCourseworkOpen)
+                }}
                 aria-expanded={isCourseworkOpen}
               >
                 {isCourseworkOpen
                   ? strings.homepage.education['hide-coursework']
                   : strings.homepage.education['show-coursework']}
-                <ChevronDownIcon
-                  className={cn('size-4 transition-transform', isCourseworkOpen && 'rotate-180')}
-                />
+                <ChevronDownIcon className={cn('size-4 transition-transform', isCourseworkOpen && 'rotate-180')} />
               </Button>
             </div>
 
@@ -141,11 +139,9 @@ function Education() {
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className='text-center text-3xl font-semibold md:text-4xl'>
-        {strings.homepage.education.title}
-      </h2>
+      <h2 className='text-center text-3xl font-semibold md:text-4xl'>{strings.homepage.education.title}</h2>
 
-      <div className='mt-12 rounded-2xl p-6 shadow-feature-card lg:p-8'>
+      <div className='mt-12 rounded-2xl p-6 shadow-feature-card ring-1 [box-shadow:var(--shadow-feature-card),0_0_20px_-4px_rgb(255_255_255/0.12),0_0_40px_-12px_rgb(255_255_255/0.06)] ring-white/10 transition-shadow duration-300 hover:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.18),0_0_48px_-12px_rgb(255_255_255/0.09)] lg:p-8 dark:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.1),0_0_48px_-12px_rgb(255_255_255/0.05)] dark:ring-white/15 dark:hover:[box-shadow:var(--shadow-feature-card),0_0_28px_-4px_rgb(255_255_255/0.15),0_0_56px_-12px_rgb(255_255_255/0.08)]'>
         {EDUCATION_ENTRIES.map((entry) => (
           <EducationEntryRow key={entry.id} entry={entry} />
         ))}

@@ -31,19 +31,19 @@ const TEXTS = [
   },
 ] as const
 
-const SPEED = 4
+const SPEED = 3
 
 const variants = {
   enter: {
-    y: 100,
+    x: -24,
     opacity: 0,
   },
   center: {
-    y: 0,
+    x: 0,
     opacity: 1,
   },
   exit: {
-    y: -100,
+    x: 24,
     opacity: 0,
   },
 }
@@ -81,7 +81,7 @@ function Hero() {
               <motion.span layout key='title-middle-left'>
                 {strings.homepage.hero['title-middle-left']}
               </motion.span>
-              <div className='relative inline-block overflow-hidden align-baseline'>
+              <div className='relative inline-block overflow-hidden pb-[0.2em] align-baseline'>
                 <AnimatePresence mode='popLayout'>
                   <motion.span
                     key={currentIndex}
@@ -132,7 +132,7 @@ function Hero() {
           </motion.a>
         </div>
         <motion.div
-          className='relative size-24 shrink-0 md:size-44'
+          className='relative size-20 shrink-0 md:size-44'
           initial={{
             scale: 0,
           }}
@@ -145,7 +145,8 @@ function Hero() {
         >
           <BlurImage
             src='/images/picture.png'
-            className='size-full rounded-full'
+            className='size-full overflow-hidden rounded-full'
+            imageClassName='size-full rounded-full object-cover object-[40%_50%]'
             width={1024}
             height={1024}
             alt={`${MY_NAME}'s Logo`}

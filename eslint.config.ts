@@ -26,11 +26,6 @@ export default defineConfig(
         {
           paths: [
             {
-              name: 'next/navigation',
-              importNames: ['usePathname', 'useRouter', 'redirect', 'permanentRedirect'],
-              message: 'Please use `@/i18n/routing` instead.',
-            },
-            {
               name: 'next/link',
               importNames: ['default'],
               message: 'Please use `@/components/ui/link` instead.',

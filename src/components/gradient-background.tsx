@@ -26,10 +26,11 @@ function GradientBackground(props: GradientBackgroundProps) {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       width='100%'
+      height='100%'
       fill='none'
       viewBox='0 0 1440 550'
-      preserveAspectRatio='xMidYMid meet'
-      className={cn('max-w-300', className)}
+      preserveAspectRatio='xMidYMid slice'
+      className={cn('object-cover', className)}
       {...rest}
     >
       <g filter={`url(#${orange})`}>

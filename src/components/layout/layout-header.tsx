@@ -1,11 +1,11 @@
 'use client'
 
+import { HomeIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
 import ClientOnly from '@/components/client-only'
 import { Link } from '@/components/ui/link'
-import { Logo } from '@/components/ui/logo'
 import { IS_SERVER } from '@/lib/constants'
 import { strings } from '@/lib/strings'
 
@@ -22,7 +22,7 @@ function LayoutHeader() {
     if (pathname === '/') {
       e.preventDefault()
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      window.history.replaceState(null, '', '/')
+      globalThis.history.replaceState(null, '', '/')
     }
   }
 
@@ -69,10 +69,10 @@ function LayoutHeader() {
       <Link
         href='/#skip-nav'
         onClick={handleHomeClick}
-        className='flex items-center justify-center gap-1'
+        className='flex items-center justify-center rounded-xl text-foreground transition-colors hover:text-foreground/80'
         aria-label={strings.common.labels.home}
       >
-        <Logo width={35} aria-hidden='true' />
+        <HomeIcon className='size-5 shrink-0' aria-hidden />
       </Link>
       <div className='flex items-center gap-2'>
         <Navbar />

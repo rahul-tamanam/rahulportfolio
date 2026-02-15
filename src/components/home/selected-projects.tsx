@@ -95,7 +95,11 @@ function Card(props: CardProps) {
   const { slug, name, description } = project
 
   return (
-    <Link key={slug} href={`/projects/${slug}`} className='group relative rounded-2xl p-2 shadow-feature-card'>
+    <Link
+      key={slug}
+      href={`/projects/${slug}`}
+      className='group relative rounded-2xl p-2 shadow-feature-card ring-1 [box-shadow:var(--shadow-feature-card),0_0_20px_-4px_rgb(255_255_255/0.12),0_0_40px_-12px_rgb(255_255_255/0.06)] ring-white/10 transition-shadow duration-300 hover:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.18),0_0_48px_-12px_rgb(255_255_255/0.09)] dark:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.1),0_0_48px_-12px_rgb(255_255_255/0.05)] dark:ring-white/15 dark:hover:[box-shadow:var(--shadow-feature-card),0_0_28px_-4px_rgb(255_255_255/0.15),0_0_56px_-12px_rgb(255_255_255/0.08)]'
+    >
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <LightbulbIcon className='size-4.5' />
@@ -103,18 +107,40 @@ function Card(props: CardProps) {
         </div>
         <ArrowUpRightIcon className='size-4.5 opacity-0 transition-opacity group-hover:opacity-100' />
       </div>
-      <BlurImage
-        width={1200}
-        height={630}
-        src={`/images/projects/${slug}/cover.png`}
-        alt={description}
-        className='rounded-lg'
-        lazy={false}
-        fetchPriority='high'
-      />
-      <div className='absolute bottom-6 left-7 flex flex-col transition-[left] ease-out group-hover:left-8'>
-        <h3 className='text-2xl font-semibold text-white'>{name}</h3>
-        <p className='mt-2 text-neutral-200 dark:text-muted-foreground'>{description}</p>
+      <div className='relative overflow-hidden rounded-lg'>
+        <BlurImage
+          width={1200}
+          height={630}
+          src={`/images/projects/${slug}/cover.png`}
+          alt={description}
+          className='rounded-lg'
+          lazy={false}
+          fetchPriority='high'
+        />
+        {/* Mobile: taller dark gradient so wrapped text stays inside readable area */}
+        <div
+          className='absolute inset-0 rounded-b-lg md:hidden'
+          style={{
+            backgroundImage:
+              'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.12) 75%, transparent 100%)',
+          }}
+          aria-hidden
+        />
+        {/* Desktop: original gradient */}
+        <div
+          className='absolute inset-0 hidden rounded-b-lg md:block'
+          style={{
+            backgroundImage:
+              'linear-gradient(to top, rgba(0,0,0,0.88) 25%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.2) 50%, transparent 100%)',
+          }}
+          aria-hidden
+        />
+        <div className='absolute right-4 bottom-4 left-4 flex flex-col transition-[left] ease-out group-hover:left-8 sm:inset-x-7 sm:bottom-6'>
+          <h3 className='text-xl font-semibold text-white drop-shadow-sm sm:text-2xl'>{name}</h3>
+          <p className='mt-1.5 text-sm text-neutral-200 drop-shadow-sm sm:mt-2 sm:text-base dark:text-muted-foreground'>
+            {description}
+          </p>
+        </div>
       </div>
     </Link>
   )

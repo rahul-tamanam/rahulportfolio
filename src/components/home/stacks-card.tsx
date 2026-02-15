@@ -19,6 +19,7 @@ import {
   SiReact,
 } from '@icons-pack/react-simple-icons'
 import { ZapIcon } from 'lucide-react'
+
 import { Marquee } from '@/components/ui/marquee'
 import { strings } from '@/lib/strings'
 import { cn } from '@/utils/cn'
@@ -52,18 +53,14 @@ const SECOND_STACKS = [
   { label: 'Excel' },
 ]
 
-function StackItem({
-  item,
-}: {
-  item: { Icon?: React.ComponentType<{ className?: string }>; label: string }
-}) {
+function StackItem({ item }: { item: { Icon?: React.ComponentType<{ className?: string }>; label: string } }) {
   if (item.Icon) {
     return <item.Icon className={iconClassName} aria-label={item.label} />
   }
   return (
     <span
       className={cn(
-        'flex size-10 shrink-0 items-center justify-center rounded px-1.5 text-xs font-medium text-muted-foreground',
+        'flex size-10 shrink-0 items-center justify-center rounded-sm px-1.5 text-xs font-medium text-muted-foreground',
       )}
       title={item.label}
     >
@@ -74,7 +71,7 @@ function StackItem({
 
 function StacksCard() {
   return (
-    <div className='flex h-60 flex-col gap-2 overflow-hidden rounded-2xl p-4 shadow-feature-card lg:p-6'>
+    <div className='flex h-60 flex-col gap-2 overflow-hidden rounded-2xl p-4 shadow-feature-card ring-1 [box-shadow:var(--shadow-feature-card),0_0_20px_-4px_rgb(255_255_255/0.12),0_0_40px_-12px_rgb(255_255_255/0.06)] ring-white/10 transition-shadow duration-300 hover:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.18),0_0_48px_-12px_rgb(255_255_255/0.09)] lg:p-6 dark:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.1),0_0_48px_-12px_rgb(255_255_255/0.05)] dark:ring-white/15 dark:hover:[box-shadow:var(--shadow-feature-card),0_0_28px_-4px_rgb(255_255_255/0.15),0_0_56px_-12px_rgb(255_255_255/0.08)]'>
       <div className='flex items-center gap-2'>
         <ZapIcon className='size-4.5' />
         <h2 className='text-sm'>{strings.homepage['about-me'].skills}</h2>
