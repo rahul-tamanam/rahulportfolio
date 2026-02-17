@@ -141,7 +141,7 @@ function Education() {
     >
       <h2 className='text-center text-3xl font-semibold md:text-4xl'>{strings.homepage.education.title}</h2>
 
-      <div className='mt-12 rounded-2xl p-6 shadow-feature-card ring-1 [box-shadow:var(--shadow-feature-card),0_0_20px_-4px_rgb(255_255_255/0.12),0_0_40px_-12px_rgb(255_255_255/0.06)] ring-white/10 transition-shadow duration-300 hover:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.18),0_0_48px_-12px_rgb(255_255_255/0.09)] lg:p-8 dark:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.1),0_0_48px_-12px_rgb(255_255_255/0.05)] dark:ring-white/15 dark:hover:[box-shadow:var(--shadow-feature-card),0_0_28px_-4px_rgb(255_255_255/0.15),0_0_56px_-12px_rgb(255_255_255/0.08)]'>
+      <div className='mt-12 rounded-2xl p-6 shadow-feature-card lg:p-8'>
         {EDUCATION_ENTRIES.map((entry) => (
           <EducationEntryRow key={entry.id} entry={entry} />
         ))}

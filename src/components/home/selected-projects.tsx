@@ -95,11 +95,7 @@ function Card(props: CardProps) {
   const { slug, name, description } = project
 
   return (
-    <Link
-      key={slug}
-      href={`/projects/${slug}`}
-      className='group relative rounded-2xl p-2 shadow-feature-card ring-1 [box-shadow:var(--shadow-feature-card),0_0_20px_-4px_rgb(255_255_255/0.12),0_0_40px_-12px_rgb(255_255_255/0.06)] ring-white/10 transition-shadow duration-300 hover:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.18),0_0_48px_-12px_rgb(255_255_255/0.09)] dark:[box-shadow:var(--shadow-feature-card),0_0_24px_-4px_rgb(255_255_255/0.1),0_0_48px_-12px_rgb(255_255_255/0.05)] dark:ring-white/15 dark:hover:[box-shadow:var(--shadow-feature-card),0_0_28px_-4px_rgb(255_255_255/0.15),0_0_56px_-12px_rgb(255_255_255/0.08)]'
-    >
+    <Link key={slug} href={`/projects/${slug}`} className='group relative rounded-2xl p-2 shadow-feature-card'>
       <div className='flex items-center justify-between p-4'>
         <div className='flex items-center gap-3'>
           <LightbulbIcon className='size-4.5' />
@@ -135,7 +131,7 @@ function Card(props: CardProps) {
           }}
           aria-hidden
         />
-        <div className='absolute right-4 bottom-4 left-4 flex flex-col transition-[left] ease-out group-hover:left-8 sm:inset-x-7 sm:bottom-6'>
+        <div className='absolute inset-x-4 bottom-4 flex flex-col transition-[left] ease-out group-hover:left-8 sm:inset-x-7 sm:bottom-6'>
           <h3 className='text-xl font-semibold text-white drop-shadow-sm sm:text-2xl'>{name}</h3>
           <p className='mt-1.5 text-sm text-neutral-200 drop-shadow-sm sm:mt-2 sm:text-base dark:text-muted-foreground'>
             {description}
